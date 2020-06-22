@@ -13,7 +13,7 @@ function App() {
 
 
     return (
-        <div>
+        <div className="app">
             {ideas.map((idea) => <IdeaCard key={idea.id} idea={idea}/>)}
         </div>
     );
