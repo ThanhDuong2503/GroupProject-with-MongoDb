@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {fetchAllIdeas} from "./utils/ideas-utils";
+import IdeaCard from "./components/IdeaCard/IdeaCard";
 
 function App() {
 
@@ -13,10 +14,7 @@ function App() {
 
     return (
         <div>
-            {ideas.map((idea) =>
-                <div key={idea.id}>
-                    {idea.description}
-                </div>)}
+            {ideas.map((idea) => <IdeaCard key={idea.id} idea={idea}/>)}
         </div>
     );
 }
