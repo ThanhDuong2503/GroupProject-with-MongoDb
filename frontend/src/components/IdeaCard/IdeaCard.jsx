@@ -6,16 +6,22 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
     root: {
-       margin: 10,
-    }
+        margin: 10,
+        maxWidth: 350,
+        backgroundColor: "lightgray",
+        "&:hover": { 
+            backgroundColor: 'rgb(7, 177, 77, 0.42)' 
+        } 
+    },
 });
 
 function IdeaCard({idea}) {
     const classes = useStyles()
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root + " hoverRoot"}>
             <CardContent>
-                <Typography variant="body2" component="p">
+                <Typography variant="body2">{idea.id}</Typography>
+                <Typography variant="body1" component="p">
                     {idea.description}
                 </Typography>
             </CardContent>

@@ -1,0 +1,28 @@
+package de.neuefische.projectplanning.db;
+
+import de.neuefische.projectplanning.model.Idea;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+@Repository
+public class IdeaDb {
+    private ArrayList<Idea> ideas = new ArrayList<>(List.of(
+            new Idea("1","Some Fancy Idea"),
+            new Idea("2","Some other Fancy Idea")
+    ));
+
+    public List<Idea> getAll() {
+        return Collections.unmodifiableList(ideas);
+    }
+
+    public Idea add(Idea idea) {
+        String id = "2";
+        idea.setId(id);
+        ideas.add(idea);
+        return idea;
+    }
+}
