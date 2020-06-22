@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import {fetchAllIdeas} from "./utils/ideas-utils";
 
 function App() {
 
     const [ideas, setIdeas] = useState([]);
 
     useEffect(() => {
-        fetch('/api/ideas')
-            .then(response => response.json())
-            .then(data => setIdeas(data))
+        fetchAllIdeas().then(data => setIdeas(data))
     }, []);
 
 
