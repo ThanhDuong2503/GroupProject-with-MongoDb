@@ -5,7 +5,7 @@ export async function fetchAllIdeas() {
 
 
 export function putIdea(description){
-    fetch("/api/ideas",{
+    return fetch("/api/ideas",{
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
