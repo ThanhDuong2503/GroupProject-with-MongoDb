@@ -18,9 +18,8 @@ const useStyles = makeStyles({
 function IdeaCard({idea}) {
     const classes = useStyles()
     return (
-        <Card className={classes.root + " hoverRoot"}>
+        <Card className={classes.root}>
             <CardContent>
-                <Typography variant="body2">{idea.id}</Typography>
                 <Typography variant="body1" component="p">
                     {idea.description}
                 </Typography>

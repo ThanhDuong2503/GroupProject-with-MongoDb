@@ -4,7 +4,6 @@ import de.neuefische.projectplanning.model.Idea;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,9 +19,11 @@ public class IdeaDb {
     }
 
     public Idea add(Idea idea) {
-        String id = "2";
-        idea.setId(id);
         ideas.add(idea);
         return idea;
+    }
+
+    public void clearDb() {
+        ideas.clear();
     }
 }

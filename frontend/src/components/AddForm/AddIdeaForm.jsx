@@ -1,22 +1,22 @@
 import React, {useState} from "react";
-import {putIdea} from "../../utils/putIdea";
+import {putIdea} from "../../utils/ideas-utils";
 
 export default function AddIdeaForm() {
-    const [idea, setIdea] = useState([]);
+    const [description, setDescription] = useState("");
 
     function handleSubmit(){
-        putIdea({description:idea});
+        putIdea(description);
     }
 
     function handleChange(event){
-        setIdea(event.target.value);
+        setDescription(event.target.value);
     }
 
     return (
         <>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="ideaText">
-                    <input onChange={handleChange} id="ideaText" type="text"/>
+                    <input onChange={handleChange} value={description} id="ideaText" type="text"/>
                     <button type={"submit"}>submit</button>
                 </label>
             </form>

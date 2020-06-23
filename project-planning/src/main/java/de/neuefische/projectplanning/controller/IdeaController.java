@@ -20,9 +20,9 @@ public class IdeaController {
         return ideaService.getAll();
     }
 
-    @PutMapping("add")
-    public Idea addToDo(@RequestBody Idea idea){
-        return ideaService.add(idea);
+    @PutMapping
+    public Idea addToDo(@RequestBody String description){
+        return ideaService.add(description);
     }
 
 }

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -16,7 +17,10 @@ public class IdeaService {
         return ideaDb.getAll();
     }
 
-    public Idea add(Idea idea) {
+    public Idea add(String description) {
+        Idea idea = new Idea();
+        idea.setId(UUID.randomUUID().toString());
+        idea.setDescription(description);
         return ideaDb.add(idea);
     }
 }
