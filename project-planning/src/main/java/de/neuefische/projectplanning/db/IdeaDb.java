@@ -9,10 +9,7 @@ import java.util.List;
 
 @Repository
 public class IdeaDb {
-    private ArrayList<Idea> ideas = new ArrayList<>(List.of(
-            new Idea("1","Some Fancy Idea"),
-            new Idea("2","Some other Fancy Idea")
-    ));
+    private final ArrayList<Idea> ideas = new ArrayList<>(List.of());
 
     public List<Idea> getAll() {
         return Collections.unmodifiableList(ideas);

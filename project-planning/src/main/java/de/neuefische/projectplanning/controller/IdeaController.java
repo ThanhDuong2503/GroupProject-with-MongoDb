@@ -1,20 +1,22 @@
 package de.neuefische.projectplanning.controller;
 
+import de.neuefische.projectplanning.model.AddIdeaDto;
 import de.neuefische.projectplanning.model.Idea;
 import de.neuefische.projectplanning.service.IdeaService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.management.openmbean.CompositeData;
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("api/ideas")
 public class IdeaController {
 
-    private IdeaService ideaService;
+    private final IdeaService ideaService;
+
+    @Autowired
+    public IdeaController(IdeaService ideaService) {
+        this.ideaService = ideaService;
+    }
 
     @GetMapping
     public List<Idea> getIdeas() {
@@ -22,8 +24,8 @@ public class IdeaController {
     }
 
     @PutMapping
-    public Idea addToDo(@RequestBody String description){
-        return ideaService.add(description);
+    public Idea addToDo(@RequestBody AddIdeaDto data){
+        return ideaService.add(data.getDescription());
     }
 
 }
