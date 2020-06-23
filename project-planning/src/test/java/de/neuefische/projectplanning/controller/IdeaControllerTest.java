@@ -5,6 +5,7 @@ import de.neuefische.projectplanning.model.AddIdeaDto;
 import de.neuefische.projectplanning.model.Idea;
 import de.neuefische.projectplanning.utils.IdUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -77,5 +78,22 @@ class IdeaControllerTest {
     assertEquals(expectedIdea, putResponse.getBody());
 
     assertTrue(db.getAll().contains(expectedIdea));
+  }
+
+  @Test
+  @DisplayName("add idea should return badRequest when description is shorter than 5")
+  public void checkMinLengthDescription(){
+    //GIVEN
+    AddIdeaDto addIdeaDto = new AddIdeaDto( "some");
+    String url = "http://localhost:" + port + "/api/ideas";
+
+    HttpEntity<AddIdeaDto> requestEntity = new HttpEntity<>(addIdeaDto);
+
+    //WHEN
+    ResponseEntity<Idea> putResponse = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Idea.class);
+
+
+    //THEN
+    assertEquals(HttpStatus.BAD_REQUEST, putResponse.getStatusCode());
   }
 }

@@ -4,12 +4,18 @@ export async function fetchAllIdeas() {
 }
 
 
-export function putIdea(description){
-    return fetch("/api/ideas",{
+export function putIdea(description) {
+    return fetch("/api/ideas", {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
-        body:description
-    }).then(response=> response.json());
+        body: JSON.stringify({description: description})
+    }).then(response => {
+        if (response.status !== 200) {
+            throw new Error("invalid response");
+        }
+
+        return response.json()
+    });
 }

@@ -7,17 +7,28 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 
-export default function AddIdeaDialog({open,handleClose, onAdd}) {
+export default function AddIdeaDialog({open, handleClose, onAdd}) {
     const [description, setDescription] = useState("");
+    const [addStatus, setAddStatus] = useState();
 
-    function handleSubmit(){
-        putIdea(description).then((idea) => onAdd(idea));
-        handleClose()
-        setDescription("")
+    function handleSubmit() {
+        setAddStatus("PENDING")
+        putIdea(description)
+            .then((idea) => {
+                handleClose();
+                setDescription("");
+                onAdd(idea);
+                setAddStatus("SUCCESS")
+            }).catch(() => {
+            setAddStatus("FAILED")
+        });
+
     }
 
-    function handleChange(event){
+    function handleChange(event) {
         setDescription(event.target.value);
     }
 
@@ -36,14 +47,20 @@ export default function AddIdeaDialog({open,handleClose, onAdd}) {
                         value={description}
                         onChange={handleChange}
                         margin="normal"
+                        error={description.length < 5}
+                        helperText={"min length 5"}
                     />
                 </form>
+                {addStatus === 'PENDING' && <CircularProgress />}
+                {addStatus === 'FAILED' &&  <Typography variant="body1" component="p">
+                  Add idea failed
+                </Typography>}
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={handleSubmit} color="primary">
+                <Button disabled={description.length < 5} onClick={handleSubmit} color="primary">
                     Add
                 </Button>
             </DialogActions>

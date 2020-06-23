@@ -5,6 +5,8 @@ import de.neuefische.projectplanning.model.Idea;
 import de.neuefische.projectplanning.service.IdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +26,7 @@ public class IdeaController {
     }
 
     @PutMapping
-    public Idea addToDo(@RequestBody AddIdeaDto data){
+    public Idea addToDo(@RequestBody @Valid AddIdeaDto data){
         return ideaService.add(data.getDescription());
     }
 
