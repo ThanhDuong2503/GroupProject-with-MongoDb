@@ -59,7 +59,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: project-planning.jar
-          path: project-planning/target/project-planning.jar
+          path: project-planning/target
       - run: cd project-planning/target && ls -R
       - name: login to heroku
         env:
