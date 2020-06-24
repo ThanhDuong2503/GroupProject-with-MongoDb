@@ -60,7 +60,6 @@ jobs:
         with:
           name: project-planning.jar
           path: project-planning/target
-      - run: cd project-planning/target && ls -R
       - name: login to heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
