@@ -1,7 +1,8 @@
 name: Deploy project plan to heroku
 
-# TODO change to master branch
-on: push
+on:
+  push:
+    branches: [ master ]
 
 jobs:
   build-frontend:
