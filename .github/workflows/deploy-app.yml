@@ -41,4 +41,10 @@ jobs:
           java-version: 14
       - name: Build with Maven
         run: mvn -B package --file ./project-planning/pom.xml
+      - name: upload project-planning.jar file
+        uses: actions/upload-artifact@v2
+        with:
+          name: app.jar
+          path: project-planning/target/project-planning.jar
+
 
