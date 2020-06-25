@@ -1,6 +1,6 @@
 package de.neuefische.projectplanning.service;
-
 import de.neuefische.projectplanning.db.IdeaDb;
+import de.neuefische.projectplanning.db.IdeaMongoDb;
 import de.neuefische.projectplanning.model.Idea;
 import de.neuefische.projectplanning.utils.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,23 +10,23 @@ import java.util.List;
 
 @Service
 public class IdeaService {
-    private final IdeaDb ideaDb;
+    private final IdeaMongoDb ideaMongoDb;
     private final IdUtils idUtils;
 
     @Autowired
-    public IdeaService(IdeaDb ideaDb, IdUtils idUtils) {
-        this.ideaDb = ideaDb;
+    public IdeaService(IdeaMongoDb ideaMongoDb, IdUtils idUtils) {
+        this.ideaMongoDb = ideaMongoDb;
         this.idUtils = idUtils;
     }
 
-    public List<Idea> getAll(){
-        return ideaDb.getAll();
+    public Iterable<Idea> getAll(){
+        return ideaMongoDb.findAll();
     }
 
     public Idea add(String description) {
         Idea idea = new Idea();
         idea.setId(idUtils.generateRandomId());
         idea.setDescription(description);
-        return ideaDb.add(idea);
+        return ideaMongoDb.save(idea);
     }
 }

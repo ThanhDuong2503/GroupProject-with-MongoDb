@@ -22,7 +22,7 @@ public class IdeaController {
 
     @GetMapping
     public List<Idea> getIdeas() {
-        return ideaService.getAll();
+        return (List<Idea>) ideaService.getAll();
     }
 
     @PutMapping
