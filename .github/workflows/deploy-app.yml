@@ -3,6 +3,8 @@ name: Deploy project plan to heroku
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build-frontend:
