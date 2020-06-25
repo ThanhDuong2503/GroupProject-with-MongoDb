@@ -1,6 +1,1 @@
-spring:
-  data:
-    mongodb:
-      database: projectplan
-      host: localhost
-      port: 27017
+
