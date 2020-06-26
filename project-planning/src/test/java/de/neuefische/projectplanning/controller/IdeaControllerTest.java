@@ -1,6 +1,7 @@
 package de.neuefische.projectplanning.controller;
 
 import de.neuefische.projectplanning.db.IdeaDb;
+import de.neuefische.projectplanning.db.IdeaMongoDb;
 import de.neuefische.projectplanning.model.AddIdeaDto;
 import de.neuefische.projectplanning.model.Idea;
 import de.neuefische.projectplanning.utils.IdUtils;
@@ -17,6 +18,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -31,22 +34,22 @@ class IdeaControllerTest {
   public TestRestTemplate restTemplate;
 
   @Autowired
-  private IdeaDb db;
+  private IdeaMongoDb db;
 
   @MockBean
   private IdUtils idUtils;
 
   @BeforeEach
   public void resetDatabase() {
-    db.clearDb();
+    db.deleteAll();
   }
 
   @Test
   public void getIdeasShouldReturnAllIdeas() {
     //GIVEN
     String url = "http://localhost:" + port + "/api/ideas";
-    db.add(new Idea("1", "Some Fancy Idea"));
-    db.add(new Idea("2", "Some other Fancy Idea"));
+    db.save(new Idea("1", "Some Fancy Idea"));
+    db.save(new Idea("2", "Some other Fancy Idea"));
     //WHEN
     ResponseEntity<Idea[]> response = restTemplate.getForEntity(url, Idea[].class);
 
@@ -77,7 +80,9 @@ class IdeaControllerTest {
     assertNotNull(putResponse.getBody());
     assertEquals(expectedIdea, putResponse.getBody());
 
-    assertTrue(db.getAll().contains(expectedIdea));
+    Optional<Idea> byId = db.findById("some-random-id");
+    assertTrue(byId.isPresent());
+    assertEquals(byId.get(),expectedIdea);
   }
 
   @Test

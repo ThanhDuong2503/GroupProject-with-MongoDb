@@ -4,6 +4,6 @@ ENV ENVIRONMENT=prod
 
 MAINTAINER Thanh Duong <thanh.duong2503@hotmail.de>
 
-ADD project-planning/target/app.jar app.jar
+ADD project-planning/target/project-planning.jar app.jar
 
-CMD [ "sh", "-c", "java -Dserver.port=$PORT -jar /app.jar" ]
+CMD [ "sh", "-c", "java -Dserver.port=$PORT -Dspring.data.mongodb.uri=$MONGODB_URI -jar /app.jar" ]
