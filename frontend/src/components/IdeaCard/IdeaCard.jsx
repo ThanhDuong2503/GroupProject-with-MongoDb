@@ -16,7 +16,10 @@ const useStyles = makeStyles({
     },
 });
 
-function IdeaCard({idea}) {
+function IdeaCard({idea,onDeleteSuccess}) {
+    function handleDelete(){
+        deleteIdea(idea.id).then(()=> onDeleteSuccess())
+    }
     const classes = useStyles()
     return (
         <Card className={classes.root}>
@@ -24,7 +27,7 @@ function IdeaCard({idea}) {
                 <Typography variant="body1" component="p">
                     {idea.description}
                 </Typography>
-                <button onClick={() => deleteIdea(idea.id)}>delete</button>
+                <button onClick={handleDelete}>delete</button>
             </CardContent>
         </Card>
     )

@@ -22,9 +22,6 @@ export function putIdea(description) {
 
 export function deleteIdea(id){
     return fetch(`/api/ideas/${id}`,{
-        method:"DELETE",
-        headers:{
-            'Content-Type': 'application/json'
-        }
+        method:"DELETE"
     });
 }
