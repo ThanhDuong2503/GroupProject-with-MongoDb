@@ -1,6 +1,9 @@
 package de.neuefische.projectplanning.controller;
 
+<<<<<<< HEAD
 import de.neuefische.projectplanning.db.IdeaDb;
+=======
+>>>>>>> d612338ba8db4979eea4d6becb3a4d4b003bde14
 import de.neuefische.projectplanning.db.IdeaMongoDb;
 import de.neuefische.projectplanning.model.AddIdeaDto;
 import de.neuefische.projectplanning.model.Idea;
@@ -100,5 +103,50 @@ class IdeaControllerTest {
 
     //THEN
     assertEquals(HttpStatus.BAD_REQUEST, putResponse.getStatusCode());
+  }
+
+  @Test
+  @DisplayName("delete by id should delete idea with id")
+  public void deleteIdea(){
+    //GIVEN
+    db.save(new Idea("1", "Some Fancy Idea"));
+    db.save(new Idea("2", "Some other Fancy Idea"));
+
+    //WHEN
+    String url = "http://localhost:" + port + "/api/ideas/2";
+    restTemplate.delete(url);
+
+    //THEN
+    assertTrue(db.findById("2").isEmpty());
+  }
+
+
+  @Test
+  @DisplayName("get by id should return idea with id")
+  public void getIdeaById(){
+    //GIVEN
+    db.save(new Idea("1", "Some Fancy Idea"));
+    db.save(new Idea("2", "Some other Fancy Idea"));
+
+    //WHEN
+    String url = "http://localhost:" + port + "/api/ideas/2";
+    ResponseEntity<Idea> response = restTemplate.getForEntity(url, Idea.class);
+
+    //THEN
+    assertEquals(response.getStatusCode(), HttpStatus.OK);
+    assertEquals(response.getBody(), new Idea("2", "Some other Fancy Idea"));
+  }
+
+  @Test
+  @DisplayName("when id not exists get idea by id should return status not found")
+  public void getIdeaByIdNotfound(){
+    //GIVEN
+    db.save(new Idea("1", "Some Fancy Idea"));
+    //WHEN
+    String url = "http://localhost:" + port + "/api/ideas/2";
+    ResponseEntity<Idea> response = restTemplate.getForEntity(url, Idea.class);
+
+    //THEN
+    assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
   }
 }
