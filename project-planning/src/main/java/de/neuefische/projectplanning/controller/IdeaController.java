@@ -26,7 +26,7 @@ public class IdeaController {
     }
 
     @PutMapping
-    public Idea addToDo(@RequestBody @Valid AddIdeaDto data){
+    public Idea addIdea(@RequestBody @Valid AddIdeaDto data){
         return ideaService.add(data.getDescription());
     }
 
