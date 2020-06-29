@@ -115,4 +115,34 @@ class IdeaControllerTest {
     //THEN
     assertTrue(db.findById("2").isEmpty());
   }
+
+
+  @Test
+  @DisplayName("get by id should return idea with id")
+  public void getIdeaById(){
+    //GIVEN
+    db.save(new Idea("1", "Some Fancy Idea"));
+    db.save(new Idea("2", "Some other Fancy Idea"));
+
+    //WHEN
+    String url = "http://localhost:" + port + "/api/ideas/2";
+    ResponseEntity<Idea> response = restTemplate.getForEntity(url, Idea.class);
+
+    //THEN
+    assertEquals(response.getStatusCode(), HttpStatus.OK);
+    assertEquals(response.getBody(), new Idea("2", "Some other Fancy Idea"));
+  }
+
+  @Test
+  @DisplayName("when id not exists get idea by id should return status not found")
+  public void getIdeaByIdNotfound(){
+    //GIVEN
+    db.save(new Idea("1", "Some Fancy Idea"));
+    //WHEN
+    String url = "http://localhost:" + port + "/api/ideas/2";
+    ResponseEntity<Idea> response = restTemplate.getForEntity(url, Idea.class);
+
+    //THEN
+    assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+  }
 }

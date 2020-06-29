@@ -6,6 +6,8 @@ import de.neuefische.projectplanning.utils.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class IdeaService {
     private final IdeaMongoDb ideaDb;
@@ -30,5 +32,9 @@ public class IdeaService {
 
     public void deleteIdea(String id) {
         ideaDb.deleteById(id);
+    }
+
+    public Optional<Idea> getIdea(String id) {
+        return ideaDb.findById(id);
     }
 }

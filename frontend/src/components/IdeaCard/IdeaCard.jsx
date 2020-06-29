@@ -6,6 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {deleteIdea} from "../../utils/ideas-utils";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -23,8 +24,9 @@ function IdeaCard({idea,onDeleteSuccess}) {
         deleteIdea(idea.id).then(()=> onDeleteSuccess())
     }
     const classes = useStyles()
+    const history = useHistory();
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={() => history.push(`/idea/${idea.id}`)}>
             <CardContent>
                 <Typography variant="body1" component="p">
                     {idea.description}
