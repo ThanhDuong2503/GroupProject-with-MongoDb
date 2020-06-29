@@ -30,7 +30,7 @@ public class IdeaController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteTodItem(@PathVariable String id){
+    public void deleteIdea(@PathVariable String id){
         ideaService.deleteIdea(id);
     }
 }
