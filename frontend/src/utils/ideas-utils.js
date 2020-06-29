@@ -1,5 +1,8 @@
 export async function fetchAllIdeas() {
     const response = await fetch('/api/ideas');
+    if(response.status !== 200){
+        throw new Error(response.statusText);
+    }
     return await response.json();
 }
 

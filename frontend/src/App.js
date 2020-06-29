@@ -7,18 +7,21 @@ import {
 } from "react-router-dom";
 import IdeaOverview from "./pages/IdeaOverview";
 import IdeaDetails from "./pages/IdeaDetails";
+import IdeaProvider from "./context/IdeaContextProvider";
 
 function App() {
-    return <BrowserRouter>
-        <Switch>
-            <Route path="/idea/:id">
-                <IdeaDetails/>
-            </Route>
-            <Route path="/" exact>
-                <IdeaOverview/>
-            </Route>
-        </Switch>
-    </BrowserRouter>
+    return <IdeaProvider>
+        <BrowserRouter>
+            <Switch>
+                <Route path="/idea/:id">
+                    <IdeaDetails/>
+                </Route>
+                <Route path="/" exact>
+                    <IdeaOverview/>
+                </Route>
+            </Switch>
+        </BrowserRouter>
+    </IdeaProvider>
 }
 
 export default App;

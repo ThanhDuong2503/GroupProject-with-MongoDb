@@ -1,19 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Button from "@material-ui/core/Button";
-import {fetchAllIdeas} from "../utils/ideas-utils";
 import AddIdeaDialog from "../components/AddIdeaDialog/AddIdeaDialog";
 import IdeaCard from "../components/IdeaCard/IdeaCard";
+import {IdeaDispatchContext, IdeaStateContext} from "../context/IdeaContext";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
+import {fetchIdeas} from "../context/idea-actions";
 
 function IdeaOverview() {
 
-    const [ideas, setIdeas] = useState([]);
     const [showAddDialog, setShowAddDialog] = useState(false);
 
+    const {ideas, fetchStatus} = useContext(IdeaStateContext);
+    const dispatch = useContext(IdeaDispatchContext);
 
     useEffect(() => {
-        fetchAllIdeas().then(data => setIdeas(data))
-    }, []);
-
+        if (!fetchStatus) {
+            fetchIdeas(dispatch);
+        }
+    }, [fetchStatus, dispatch])
 
     return (
         <div className={"app"}>
@@ -23,12 +28,13 @@ function IdeaOverview() {
 
             <AddIdeaDialog open={showAddDialog}
                            handleClose={() => setShowAddDialog(false)}
-                           onAdd={(idea) => setIdeas([...ideas, idea])}
+                           onAdd={(idea) => console.log("!!")}
             />
-            {ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} onDeleteSuccess={() => {
-                const filteredList = ideas.filter(filterIdea => filterIdea.id !== idea.id);
-                setIdeas(filteredList)
-            }}/>)}
+            {fetchStatus === 'PENDING' && <CircularProgress/>}
+            {fetchStatus === 'FAILED' && <Typography variant="body1" color="error" component="p">
+                Fetch Ideas failed
+            </Typography>}
+            {ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} onDeleteSuccess={() => console.log('delete')}/>)}
         </div>
     );
 }
