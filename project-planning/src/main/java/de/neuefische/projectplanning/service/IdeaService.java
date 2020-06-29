@@ -27,4 +27,8 @@ public class IdeaService {
         idea.setDescription(description);
         return ideaDb.save(idea);
     }
+
+    public void deleteIdea(String id) {
+        ideaDb.deleteById(id);
+    }
 }

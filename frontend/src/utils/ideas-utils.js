@@ -19,3 +19,9 @@ export function putIdea(description) {
         return response.json()
     });
 }
+
+export function deleteIdea(id){
+    return fetch(`/api/ideas/${id}`,{
+        method:"DELETE"
+    });
+}

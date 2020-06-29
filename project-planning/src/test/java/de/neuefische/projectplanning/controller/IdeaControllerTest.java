@@ -100,4 +100,19 @@ class IdeaControllerTest {
     //THEN
     assertEquals(HttpStatus.BAD_REQUEST, putResponse.getStatusCode());
   }
+
+  @Test
+  @DisplayName("delete by id should delete idea with id")
+  public void deleteIdea(){
+    //GIVEN
+    db.save(new Idea("1", "Some Fancy Idea"));
+    db.save(new Idea("2", "Some other Fancy Idea"));
+
+    //WHEN
+    String url = "http://localhost:" + port + "/api/ideas/2";
+    restTemplate.delete(url);
+
+    //THEN
+    assertTrue(db.findById("2").isEmpty());
+  }
 }
