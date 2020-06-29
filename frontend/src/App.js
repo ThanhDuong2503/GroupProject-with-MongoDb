@@ -26,8 +26,9 @@ function App() {
                            handleClose={() => setShowAddDialog(false)}
                            onAdd={(idea) => setIdeas([...ideas, idea])}
             />
-            {ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} onDeleteSuccess={()=>{
-                setIdeas(ideas.filter(filterIdea=>filterIdea.id!==idea.id))
+            {ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} onDeleteSuccess={() => {
+                const filteredList = ideas.filter(filterIdea => filterIdea.id !== idea.id);
+                setIdeas(filteredList)
             }}/>)}
         </div>
     );

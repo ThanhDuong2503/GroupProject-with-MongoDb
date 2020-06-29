@@ -4,6 +4,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
 import {deleteIdea} from "../../utils/ideas-utils";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
     root: {
@@ -27,7 +29,9 @@ function IdeaCard({idea,onDeleteSuccess}) {
                 <Typography variant="body1" component="p">
                     {idea.description}
                 </Typography>
-                <button onClick={handleDelete}>delete</button>
+                <IconButton onClick={handleDelete}>
+                    <DeleteIcon />
+                </IconButton>
             </CardContent>
         </Card>
     )
