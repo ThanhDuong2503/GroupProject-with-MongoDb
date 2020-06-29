@@ -20,8 +20,16 @@ export function putIdea(description) {
     });
 }
 
-export function deleteIdea(id){
-    return fetch(`/api/ideas/${id}`,{
-        method:"DELETE"
+export function deleteIdea(id) {
+    return fetch(`/api/ideas/${id}`, {
+        method: "DELETE"
     });
+}
+
+export async function fetchIdea(id) {
+    const response = await fetch(`/api/ideas/${id}`)
+    if(response.status !== 200){
+        throw new Error("something went wrong!")
+    }
+    return await response.json();
 }
