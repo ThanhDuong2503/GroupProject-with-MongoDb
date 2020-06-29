@@ -21,7 +21,7 @@ public class IdeaController {
     }
 
     @GetMapping
-    public List<Idea> getIdeas() {
+    public Iterable<Idea> getIdeas() {
         return ideaService.getAll();
     }
 
