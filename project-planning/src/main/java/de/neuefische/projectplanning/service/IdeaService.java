@@ -56,6 +56,5 @@ public class IdeaService {
 
     public Optional<Idea> getIdea(String id) {
         return ideaDb.findById(id);
->>>>>>> d612338ba8db4979eea4d6becb3a4d4b003bde14
     }
 }

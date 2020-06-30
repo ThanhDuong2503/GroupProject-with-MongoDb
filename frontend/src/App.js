@@ -7,8 +7,9 @@ import {
 } from "react-router-dom";
 import IdeaOverview from "./pages/IdeaOverview";
 import IdeaDetails from "./pages/IdeaDetails";
+import IdeaProvider from "./context/idea/IdeaContextProvider";
 
-function App() {
+function Navigation () {
     return <BrowserRouter>
         <Switch>
             <Route path="/idea/:id">
@@ -18,7 +19,13 @@ function App() {
                 <IdeaOverview/>
             </Route>
         </Switch>
-    </BrowserRouter>
+    </BrowserRouter>;
+}
+
+function App() {
+    return <IdeaProvider>
+        <Navigation/>
+    </IdeaProvider>
 }
 
 export default App;

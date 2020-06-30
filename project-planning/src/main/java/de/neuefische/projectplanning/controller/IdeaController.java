@@ -23,13 +23,9 @@ public class IdeaController {
     }
 
     @GetMapping
-<<<<<<< HEAD
-    public List<Idea> getIdeas() {
-        return (List<Idea>) ideaService.getAll();
-=======
+
     public Iterable<Idea> getIdeas() {
         return ideaService.getAll();
->>>>>>> d612338ba8db4979eea4d6becb3a4d4b003bde14
     }
 
     @PutMapping

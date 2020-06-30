@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import {putIdea} from "../../utils/ideas-utils";
+import React, {useContext, useEffect, useState} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -9,23 +8,25 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
+import {addIdea} from "../../context/idea/idea-actions";
+import {IdeaDispatchContext, IdeaStateContext} from "../../context/idea/IdeaContext";
 
-export default function AddIdeaDialog({open, handleClose, onAdd}) {
+export default function AddIdeaDialog({open, handleClose}) {
     const [description, setDescription] = useState("");
-    const [addStatus, setAddStatus] = useState();
+
+    const {addStatus} = useContext(IdeaStateContext);
+
+    useEffect(() => {
+      if (addStatus === 'SUCCESS') {
+        setDescription('');
+        handleClose();
+      }
+    }, [addStatus]);
+
+    const dispatch = useContext(IdeaDispatchContext);
 
     function handleSubmit() {
-        setAddStatus("PENDING")
-        putIdea(description)
-            .then((idea) => {
-                handleClose();
-                setDescription("");
-                onAdd(idea);
-                setAddStatus("SUCCESS")
-            }).catch(() => {
-            setAddStatus("FAILED")
-        });
-
+      addIdea(dispatch, description);
     }
 
     function handleChange(event) {
