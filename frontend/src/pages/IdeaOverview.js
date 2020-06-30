@@ -28,7 +28,6 @@ function IdeaOverview() {
 
             <AddIdeaDialog open={showAddDialog}
                            handleClose={() => setShowAddDialog(false)}
-                           onAdd={(idea) => console.log("!!")}
             />
             {fetchStatus === 'PENDING' && <CircularProgress/>}
             {fetchStatus === 'FAILED' && <Typography variant="body1" color="error" component="p">

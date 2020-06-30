@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import {addIdea} from "../../context/idea/idea-actions";
 import {IdeaDispatchContext, IdeaStateContext} from "../../context/idea/IdeaContext";
 
-export default function AddIdeaDialog({open, handleClose, onAdd}) {
+export default function AddIdeaDialog({open, handleClose}) {
     const [description, setDescription] = useState("");
 
     const {addStatus} = useContext(IdeaStateContext);
