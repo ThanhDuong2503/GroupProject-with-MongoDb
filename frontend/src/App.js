@@ -9,18 +9,22 @@ import IdeaOverview from "./pages/IdeaOverview";
 import IdeaDetails from "./pages/IdeaDetails";
 import IdeaProvider from "./context/idea/IdeaContextProvider";
 
+function Navigation () {
+    return <BrowserRouter>
+        <Switch>
+            <Route path="/idea/:id">
+                <IdeaDetails/>
+            </Route>
+            <Route path="/" exact>
+                <IdeaOverview/>
+            </Route>
+        </Switch>
+    </BrowserRouter>;
+}
+
 function App() {
     return <IdeaProvider>
-        <BrowserRouter>
-            <Switch>
-                <Route path="/idea/:id">
-                    <IdeaDetails/>
-                </Route>
-                <Route path="/" exact>
-                    <IdeaOverview/>
-                </Route>
-            </Switch>
-        </BrowserRouter>
+        <Navigation/>
     </IdeaProvider>
 }
 
