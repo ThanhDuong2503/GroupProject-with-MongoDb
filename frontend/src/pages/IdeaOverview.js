@@ -2,10 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import Button from "@material-ui/core/Button";
 import AddIdeaDialog from "../components/AddIdeaDialog/AddIdeaDialog";
 import IdeaCard from "../components/IdeaCard/IdeaCard";
-import {IdeaDispatchContext, IdeaStateContext} from "../context/IdeaContext";
+import {IdeaDispatchContext, IdeaStateContext} from "../context/idea/IdeaContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
-import {fetchIdeas} from "../context/idea-actions";
+import {fetchIdeas} from "../context/idea/idea-actions";
 
 function IdeaOverview() {
 

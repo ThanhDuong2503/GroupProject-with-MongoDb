@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import IdeaOverview from "./pages/IdeaOverview";
 import IdeaDetails from "./pages/IdeaDetails";
-import IdeaProvider from "./context/IdeaContextProvider";
+import IdeaProvider from "./context/idea/IdeaContextProvider";
 
 function App() {
     return <IdeaProvider>

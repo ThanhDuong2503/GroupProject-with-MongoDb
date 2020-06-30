@@ -1,4 +1,4 @@
-import {deleteIdea, fetchAllIdeas, putIdea} from "../utils/ideas-utils";
+import {deleteIdea, fetchAllIdeas, putIdea} from "../../utils/ideas-utils";
 
 export const FETCH_IDEAS = 'FETCH_IDEAS'
 export const FETCH_IDEAS_SUCCESS = 'FETCH_IDEAS_SUCCESS'

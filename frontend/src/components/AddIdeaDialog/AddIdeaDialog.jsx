@@ -8,8 +8,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
-import {addIdea} from "../../context/idea-actions";
-import {IdeaDispatchContext, IdeaStateContext} from "../../context/IdeaContext";
+import {addIdea} from "../../context/idea/idea-actions";
+import {IdeaDispatchContext, IdeaStateContext} from "../../context/idea/IdeaContext";
 
 export default function AddIdeaDialog({open, handleClose, onAdd}) {
     const [description, setDescription] = useState("");

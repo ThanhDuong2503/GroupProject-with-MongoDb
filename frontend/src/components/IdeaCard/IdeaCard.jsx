@@ -6,8 +6,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useHistory } from "react-router-dom";
-import {IdeaDispatchContext} from "../../context/IdeaContext";
-import {removeIdea} from "../../context/idea-actions";
+import {IdeaDispatchContext} from "../../context/idea/IdeaContext";
+import {removeIdea} from "../../context/idea/idea-actions";
 
 const useStyles = makeStyles({
     root: {
