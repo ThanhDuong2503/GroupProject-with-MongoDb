@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -9,16 +9,24 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import {addIdea} from "../../context/idea-actions";
-import {IdeaDispatchContext} from "../../context/IdeaContext";
+import {IdeaDispatchContext, IdeaStateContext} from "../../context/IdeaContext";
 
 export default function AddIdeaDialog({open, handleClose, onAdd}) {
     const [description, setDescription] = useState("");
-    const [addStatus, setAddStatus] = useState();
+
+    const {addStatus} = useContext(IdeaStateContext);
+
+    useEffect(() => {
+      if (addStatus === 'SUCCESS') {
+        setDescription('');
+        handleClose();
+      }
+    }, [addStatus]);
 
     const dispatch = useContext(IdeaDispatchContext);
 
     function handleSubmit() {
-      addIdea(dispatch);
+      addIdea(dispatch, description);
     }
 
     function handleChange(event) {

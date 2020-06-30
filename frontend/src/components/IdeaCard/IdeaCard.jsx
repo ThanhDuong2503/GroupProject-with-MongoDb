@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
-import {deleteIdea} from "../../utils/ideas-utils";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useHistory } from "react-router-dom";
+import {IdeaDispatchContext} from "../../context/IdeaContext";
+import {removeIdea} from "../../context/idea-actions";
 
 const useStyles = makeStyles({
     root: {
@@ -19,9 +20,11 @@ const useStyles = makeStyles({
     },
 });
 
-function IdeaCard({idea,onDeleteSuccess}) {
-    function handleDelete(){
-        deleteIdea(idea.id).then(()=> onDeleteSuccess())
+function IdeaCard({idea}) {
+    const dispatch = useContext(IdeaDispatchContext);
+    function handleDelete(event){
+        event.stopPropagation();
+        removeIdea(dispatch, idea.id);
     }
     const classes = useStyles()
     const history = useHistory();
