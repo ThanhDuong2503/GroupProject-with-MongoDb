@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -28,8 +29,8 @@ public class IdeaController {
     }
 
     @PutMapping
-    public Idea addIdea(@RequestBody @Valid AddIdeaDto data){
-        return ideaService.add(data.getDescription());
+    public Idea addIdea(@RequestBody @Valid AddIdeaDto data, Principal principal){
+        return ideaService.add(data.getDescription(), principal.getName());
     }
 
     @DeleteMapping("{id}")

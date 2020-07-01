@@ -23,10 +23,11 @@ public class IdeaService {
         return ideaDb.findAll();
     }
 
-    public Idea add(String description) {
+    public Idea add(String description, String user) {
         Idea idea = new Idea();
         idea.setId(idUtils.generateRandomId());
         idea.setDescription(description);
+        idea.setUser(user);
         return ideaDb.save(idea);
     }
 
