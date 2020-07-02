@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
-import java.util.Map;
-
 @RequestMapping("auth/login")
 @RestController
 public class LoginController {
@@ -30,7 +28,7 @@ public class LoginController {
   public String login(@RequestBody LoginData data){
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(data.getUsername(), data.getPassword()));
-      return jwtUtils.createToken(new HashMap<>(Map.of("dumbo","yeah")), data.getUsername());
+      return jwtUtils.createToken(new HashMap<>(), data.getUsername());
     }catch (Exception e){
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid credentials");
     }
