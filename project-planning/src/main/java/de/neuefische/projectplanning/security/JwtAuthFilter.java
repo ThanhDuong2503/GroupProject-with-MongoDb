@@ -1,5 +1,6 @@
 package de.neuefische.projectplanning.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class JwtAuthFilter extends OncePerRequestFilter {
 
   private final JWTUtils jwtUtils;
@@ -32,17 +34,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     Optional<String> jwtToken = getJwtToken(httpServletRequest);
 
     if (jwtToken.isPresent()) {
+      log.debug("start parsing jwt token");
       try {
         String userName = jwtUtils.extractUserName(jwtToken.get());
+        log.debug("parsed username " + userName);
         UserDetails userDetails = detailsService.loadUserByUsername(userName);
-
         if (jwtUtils.validateToken(jwtToken.get(), userDetails.getUsername())) {
           UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
           usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
           SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         }
       } catch (Exception e) {
-        System.out.println(e);
+        log.info("failed to get credentials", e);
       }
     }
 
