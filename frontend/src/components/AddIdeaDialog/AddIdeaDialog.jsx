@@ -21,7 +21,7 @@ export default function AddIdeaDialog({open, handleClose}) {
         setDescription('');
         handleClose();
       }
-    }, [addStatus]);
+    }, [addStatus,handleClose]);
 
     const dispatch = useContext(IdeaDispatchContext);
 
