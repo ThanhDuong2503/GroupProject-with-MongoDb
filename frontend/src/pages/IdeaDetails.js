@@ -7,7 +7,6 @@ function IdeaDetails() {
     const {id} = useParams();
 
     const [idea, setIdea] = useState();
-
     useEffect(() => {
         fetchIdea(id).then(data => setIdea(data))
             .catch((e) => console.error(e))

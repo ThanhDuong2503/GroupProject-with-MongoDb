@@ -6,6 +6,8 @@ import {IdeaDispatchContext, IdeaStateContext} from "../context/idea/IdeaContext
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import {fetchIdeas} from "../context/idea/idea-actions";
+import {UserStateContext} from "../context/user/UserContext";
+import {Redirect} from "react-router-dom";
 
 function IdeaOverview() {
 
@@ -13,12 +15,19 @@ function IdeaOverview() {
 
     const {ideas, fetchStatus} = useContext(IdeaStateContext);
     const dispatch = useContext(IdeaDispatchContext);
+    const {authStatus} = useContext(UserStateContext);
 
     useEffect(() => {
-        if (!fetchStatus) {
+        if (!fetchStatus && authStatus === 'SUCCESS') {
             fetchIdeas(dispatch);
         }
-    }, [fetchStatus, dispatch])
+    }, [fetchStatus, dispatch,authStatus])
+
+
+
+    if(authStatus !== 'SUCCESS') {
+        return  <Redirect to={"/login"}/>
+    }
 
     return (
         <div className={"app"}>
