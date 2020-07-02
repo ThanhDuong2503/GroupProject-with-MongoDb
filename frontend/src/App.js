@@ -8,8 +8,10 @@ import {
 import IdeaOverview from "./pages/IdeaOverview";
 import IdeaDetails from "./pages/IdeaDetails";
 import IdeaProvider from "./context/idea/IdeaContextProvider";
+import LoginPage from "./pages/LoginPage";
+import UserContextProvider from "./context/user/UserContextProvider";
 
-function Navigation () {
+function Navigation() {
     return <BrowserRouter>
         <Switch>
             <Route path="/idea/:id">
@@ -18,14 +20,19 @@ function Navigation () {
             <Route path="/" exact>
                 <IdeaOverview/>
             </Route>
+            <Route path="/login" exact>
+                <LoginPage/>
+            </Route>
         </Switch>
     </BrowserRouter>;
 }
 
 function App() {
-    return <IdeaProvider>
-        <Navigation/>
-    </IdeaProvider>
+    return <UserContextProvider>
+        <IdeaProvider>
+            <Navigation/>
+        </IdeaProvider>
+    </UserContextProvider>
 }
 
 export default App;

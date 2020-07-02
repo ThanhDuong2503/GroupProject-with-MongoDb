@@ -1,5 +1,12 @@
 export async function fetchAllIdeas() {
-    const response = await fetch('/api/ideas');
+    const token = localStorage.getItem("planning-user-token");
+    const response = await fetch('/api/ideas',
+        {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
     if(response.status !== 200){
         throw new Error(response.statusText);
     }
@@ -8,10 +15,12 @@ export async function fetchAllIdeas() {
 
 
 export function putIdea(description) {
+    const token = localStorage.getItem("planning-user-token");
     return fetch("/api/ideas", {
         method: "PUT",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({description: description})
     }).then(response => {
@@ -24,13 +33,24 @@ export function putIdea(description) {
 }
 
 export function deleteIdea(id) {
+    const token = localStorage.getItem("planning-user-token");
     return fetch(`/api/ideas/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
     });
 }
 
 export async function fetchIdea(id) {
-    const response = await fetch(`/api/ideas/${id}`)
+    const token = localStorage.getItem("planning-user-token");
+    const response = await fetch(`/api/ideas/${id}`,
+        {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        })
     if(response.status !== 200){
         throw new Error("something went wrong!")
     }

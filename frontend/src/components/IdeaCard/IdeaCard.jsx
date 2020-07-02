@@ -32,7 +32,7 @@ function IdeaCard({idea}) {
         <Card className={classes.root} onClick={() => history.push(`/idea/${idea.id}`)}>
             <CardContent>
                 <Typography variant="body1" component="p">
-                    {idea.description}
+                    {idea.user} {idea.description}
                 </Typography>
                 <IconButton onClick={handleDelete}>
                     <DeleteIcon />
